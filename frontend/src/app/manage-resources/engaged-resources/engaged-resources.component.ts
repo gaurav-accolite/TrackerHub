@@ -22,7 +22,7 @@ import {ERDeleteDialogComponent} from './dialogs/delete/delete.dialog.component'
   styleUrls: ['./engaged-resources.component.scss']
 })
 export class EngagedResourcesComponent implements OnInit {
-  displayedColumns = ['id', 'title', 'state', 'url', 'created_at', 'updated_at', 'actions'];
+  displayedColumns = ['id', 'name', 'sow_name', 'project_name', 'start_date', 'end_date', 'actions', 'remarks'];
   exampleDatabase: ERDataService | null;
   dataSource: ExampleDataSource | null;
   index: number;
@@ -59,13 +59,13 @@ export class EngagedResourcesComponent implements OnInit {
     });
   }
 
-  startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
+  startEdit(i: number, id: number, name: string, sow_name: string, project_name: string, start_date: string, end_date: string, remarks: string) {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(EREditDialogComponent, {
-      data: {id: id, title: title, state: state, url: url, created_at: created_at, updated_at: updated_at}
+      data: {id: id, name: name, sow_name: sow_name, project_name: project_name, start_date: start_date, end_date: end_date, remarks : remarks}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -80,11 +80,11 @@ export class EngagedResourcesComponent implements OnInit {
     });
   }
 
-  deleteItem(i: number, id: number, title: string, state: string, url: string) {
+  deleteItem(i: number, id: number, name: string, sow_name: string, project_name: string) {
     this.index = i;
     this.id = id;
     const dialogRef = this.dialog.open(ERDeleteDialogComponent, {
-      data: {id: id, title: title, state: state, url: url}
+      data: {id: id, name: name, sow_name: sow_name, project_name: project_name}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -168,7 +168,7 @@ export class ExampleDataSource extends DataSource<Issue> {
     return Observable.merge(...displayDataChanges).map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-        const searchStr = (issue.id + issue.title + issue.url + issue.created_at).toLowerCase();
+        const searchStr = (issue.id + issue.name + issue.project_name + issue.start_date).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -198,11 +198,11 @@ export class ExampleDataSource extends DataSource<Issue> {
 
       switch (this._sort.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'title': [propertyA, propertyB] = [a.title, b.title]; break;
-        case 'state': [propertyA, propertyB] = [a.state, b.state]; break;
-        case 'url': [propertyA, propertyB] = [a.url, b.url]; break;
-        case 'created_at': [propertyA, propertyB] = [a.created_at, b.created_at]; break;
-        case 'updated_at': [propertyA, propertyB] = [a.updated_at, b.updated_at]; break;
+        case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
+        case 'sow_name': [propertyA, propertyB] = [a.sow_name, b.sow_name]; break;
+        case 'project_name': [propertyA, propertyB] = [a.project_name, b.project_name]; break;
+        case 'start_date': [propertyA, propertyB] = [a.start_date, b.start_date]; break;
+        case 'end_date': [propertyA, propertyB] = [a.end_date, b.end_date]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

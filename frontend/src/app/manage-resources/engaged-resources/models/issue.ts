@@ -1,8 +1,9 @@
 export class Issue {
   id: number;
-  title: string;
-  state: string;
-  url: string;
-  created_at: string;
-  updated_at: string;
+  name: string;
+  sow_name: string;
+  project_name: string;
+  start_date: string;
+  end_date: string;
+  remarks: string;
 }

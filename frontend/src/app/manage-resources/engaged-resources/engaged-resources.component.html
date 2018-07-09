@@ -19,7 +19,6 @@
                   <input matInput #filter placeholder="Filter issues">
                 </mat-form-field>
               </div>
-            
               <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
             
                 <!--- Note that these columns can be defined in any order.
@@ -31,29 +30,34 @@
                   <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="title">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.title}}</mat-cell>
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="state">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>State</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.state}}</mat-cell>
+                <ng-container matColumnDef="sow_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>SoW Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_name}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="url">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Url</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.url}}</mat-cell>
+                <ng-container matColumnDef="project_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.project_name}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="created_at">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Created at</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.created_at}}</mat-cell>
+                <ng-container matColumnDef="start_date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.start_date}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="updated_at">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Updated at</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.updated_at}}</mat-cell>
+                <ng-container matColumnDef="end_date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.end_date}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="remarks">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.remarks}}</mat-cell>
                 </ng-container>
             
                 <!-- actions -->
@@ -65,11 +69,11 @@
                   </mat-header-cell>
             
                   <mat-cell *matCellDef="let row; let i=index;">
-                    <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+                    <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.name, row.sow_name, row.project_name, row.start_date, row.end_date)">
                       <mat-icon aria-label="Edit">edit</mat-icon>
                     </button>
             
-                    <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+                    <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.name, row.sow_name, row.project_name)">
                       <mat-icon aria-label="Delete">delete</mat-icon>
                     </button>
                   </mat-cell>

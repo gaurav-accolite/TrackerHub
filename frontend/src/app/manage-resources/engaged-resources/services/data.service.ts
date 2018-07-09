@@ -23,12 +23,8 @@ export class ERDataService {
 
   /** CRUD METHODS */
   getAllIssues(): void {
-    this.httpClient.get<Issue[]>(this.API_URL).subscribe(data => {
-        this.dataChange.next(data);
-      },
-      (error: HttpErrorResponse) => {
-      console.log (error.name + ' ' + error.message);
-      });
+    this.httpClient.get<Issue[]>(this.API_URL).subscribe(data => {this.dataChange.next(data);},
+      (error: HttpErrorResponse) => {console.log (error.name + ' ' + error.message);});
   }
 
   // DEMO ONLY, you can find working methods below
