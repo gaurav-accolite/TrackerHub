@@ -1,0 +1,17 @@
+<div class="container">
+  <h3 mat-dialog-title>Release employee with:</h3>
+  <div mat-dialog-content>
+    Id: {{data.id}}
+    <p></p>
+    Name: {{data.name}}
+    <p></p>
+    SOW: {{data.sow_name}}
+    <p></p>
+    Project: {{data.project_name}}
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="1" (click)="confirmDelete()">Release</button>
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+  </div>
+</div>

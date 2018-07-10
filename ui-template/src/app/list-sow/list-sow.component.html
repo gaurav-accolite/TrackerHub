@@ -1,3 +1,126 @@
-<p>
-  list-sow works!
-</p>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+
+            <mat-card>
+
+            <mat-toolbar color="primary" style="background-color: #F44336">
+              <span>Statement of Work</span>
+              <span class="spacer" style="align:right;"></span>
+              <button mat-icon-button (click)="refresh()">
+                <mat-icon>refresh</mat-icon>
+              </button>
+            </mat-toolbar>
+            
+            <div class="container mat-elevation-z8">
+            
+              <div class="form">
+                <mat-form-field floatPlaceholder="never" color="accent">
+                  <input matInput #filter placeholder="Filter issues">
+                </mat-form-field>
+              </div>
+            
+              <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+            
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+            
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                  <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="sow_id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>sow_id</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_id}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="sow_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_name}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="sow_budget">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Budget</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_budget}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="sow_status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_status}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="sow_startdate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_startdate}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="sow_enddate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_enddate}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="client_id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Client Id</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.client_id}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="currency_type">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Currency Type</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.currency_type}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="remarks">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.remarks}}</mat-cell>
+                </ng-container>
+
+                <!-- actions -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef>
+                    <button mat-icon-button color="primary" (click)="addNew()">
+                      <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                    </button>
+                  </mat-header-cell>
+            
+                  <mat-cell *matCellDef="let row; let i=index;">
+                    <button mat-icon-button color="accent" (click)="startEdit(i, row.id,row.sow_id,row.sow_name,row.sow_budget,row.sow_status,
+                    row.sow_startdate,row.sow_enddate,row.client_id,row.currency_type,row.remarks)">
+                      <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+            
+                    <button mat-icon-button color="accent" (click)="deleteItem(i,row.id, row.sow_id,row.sow_name,row.sow_budget,row.sow_status,
+                    row.sow_startdate,row.sow_enddate,row.client_id,row.currency_type,row.remarks)">
+                      <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+            
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            
+
+              <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+                No results
+              </div>
+            
+              <mat-paginator #paginator
+                             [length]="dataSource.filteredData.length"
+                             [pageIndex]="0"
+                             [pageSize]="10"
+                             [pageSizeOptions]="[5, 10, 25, 100]">
+              </mat-paginator>
+            </div>
+            </mat-card>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+

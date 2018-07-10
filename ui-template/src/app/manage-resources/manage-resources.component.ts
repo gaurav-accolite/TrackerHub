@@ -7,27 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageResourcesComponent implements OnInit {
 
-  title : string = "testing manage resources";
-
   constructor() { }
 
   ngOnInit() {
-  }
-
-  display() {
-
-  }
-
-  assign() {
-
-  }
-
-  release() {
-
-  }
-
-  modifyEndDate() {
-    
   }
 
 }

@@ -59,9 +59,9 @@ export const AdminLayoutRoutes: Routes = [
     // { path: 'notifications',  component: NotificationsComponent },
     // { path: 'upgrade',        component: UpgradeComponent },
     { path: 'list-sow',         component: ListSowComponent },
-    { path: 'create-sow',       component: CreateSowComponent },
+//    { path: 'create-sow',       component: CreateSowComponent },
     { path: 'list-project',     component: ListProjectComponent },
-    { path: 'create-project',   component: CreateProjectComponent },
+//    { path: 'create-project',   component: CreateProjectComponent },
     { path: 'manage-resources', component: ManageResourcesComponent },
     { path: 'milestones',       component: MilestonesComponent },
 ];

@@ -1,0 +1,56 @@
+<div class="container">
+  <h3 mat-dialog-title>Add new Project</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="data.project_id" [(ngModel)]="data.project_id"  name="project_id" required >
+        
+      </mat-form-field>
+    </div>
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea matInput #input class="form-control" placeholder="sow_id" [(ngModel)]="data.sow_id" name="sow_id" required ></textarea>
+        
+      </mat-form-field>
+    </div>
+
+
+        <!--Contains mat-hint for characters count and has maxLengt set-->
+        <div class="form">
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" placeholder="project_name" [(ngModel)]="project.sow_name" name="project_name" maxlength="10" required >
+            <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
+          </mat-form-field>
+        </div>
+        
+
+        
+        <div class="form">
+            <mat-form-field color="accent">
+                <input matInput [matDatepicker]="ast" [(ngModel)]="data.project_startdate" name="project_startdate" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="ast"></mat-datepicker-toggle>
+                <mat-datepicker #ast></mat-datepicker>
+              </mat-form-field>
+        </div>
+    
+    
+
+        <div class="form">
+            <mat-form-field color="accent">
+                <input matInput [matDatepicker]="addsp" [(ngModel)]="data.project_enddate" name="project_enddate" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="addsp"></mat-datepicker-toggle>
+                <mat-datepicker #addsp></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

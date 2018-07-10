@@ -1,0 +1,106 @@
+<div class="container">
+  <h3 mat-dialog-title>Add new SOW</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="data.id" [(ngModel)]="data.id"  name="id" required >
+
+      </mat-form-field>
+    </div>
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea matInput #input  placeholder="sow_id" [(ngModel)]="data.sow_id" name="sow_id" required ></textarea>
+
+      </mat-form-field>
+    </div>
+
+
+        <!--Contains mat-hint for characters count and has maxLengt set-->
+        <div class="form">
+          <mat-form-field color="accent">
+            <input matInput #inputstate  placeholder="sow_name" [(ngModel)]="data.sow_name" name="sow_name" maxlength="10" required >
+            <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
+          </mat-form-field>
+        </div>
+        
+
+        
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea matInput #input  placeholder="sow_budget" [(ngModel)]="data.sow_budget" name="sow_budget" required ></textarea>
+
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field color="accent">
+            <input matInput [matDatepicker]="picker_start" [(ngModel)]="data.sow_startdate" name="sow_startdate" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
+            <mat-datepicker #picker_start></mat-datepicker>
+          </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker_end" [(ngModel)]="data.sow_enddate" name="sow_enddate" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
+            <mat-datepicker #picker_end>End Date</mat-datepicker>
+          </mat-form-field>
+    </div>
+
+        <!--Textarea for demo purposes-->
+        <div class="form">
+            <mat-form-field color="accent">
+                <mat-select placeholder="client_Id" [(ngModel)]="data.client_id" name="client_id" >
+                    <mat-option value="1">Morgan Stanley</mat-option>
+                    <mat-option value="2">Fedex</mat-option>
+                    <mat-option value="3">Goldman Sachs</mat-option>
+                    <mat-option value="4">British Telecom</mat-option>
+                  </mat-select>
+        
+                  
+            </mat-form-field>
+          </div>  
+
+        <!--Textarea for demo purposes-->
+        <div class="form">
+          <mat-form-field color="accent">
+            <textarea matInput #input  placeholder="remarks" [(ngModel)]="data.remarks" name="remarks" required ></textarea>
+    
+          </mat-form-field>
+        </div>
+
+        <!--Contains mat-hint for characters count and has maxLengt set-->
+        <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #inputstate  placeholder="sow_status" [(ngModel)]="data.sow_status" name="sow_status" maxlength="10" required >
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>    
+            </mat-form-field>
+          </div>
+  
+        <div class="form">
+            <mat-form-field color="accent">
+                <mat-select placeholder="Select1" [(ngModel)]="data.currency_type" name="currency_type" >
+                    <mat-option value="INR">INR</mat-option>
+                    <mat-option value="USD">USD</mat-option>
+                    <mat-option value="EUR">EUR</mat-option>
+                    <mat-option value="SGD">SGD</mat-option>
+                    <mat-option value="GBP">GBP</mat-option>
+                  </mat-select>
+        
+                  
+            </mat-form-field>
+          </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -110,17 +110,14 @@ export class NavbarComponent implements OnInit {
     };
 
     getTitle(){
-      var titlee = this.location.prepareExternalUrl(this.location.path());
-      if(titlee.charAt(0) === '#'){
-          titlee = titlee.slice( 2 );
+        var title : string = this.location.path();
+        if(title[0] == '/') title = title.slice(1);
+        title = title.charAt(0).toUpperCase() + title.substring(1);
+        var arr : string[] = title.split('-');
+        for(var i = 0;i < arr.length ; i++) {
+            arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1);
+        }
+        title = arr.join(' ');
+        return 'Dashboard - ' + title;
       }
-      titlee = titlee.split('/').pop();
-
-      for(var item = 0; item < this.listTitles.length; item++){
-          if(this.listTitles[item].path === titlee){
-              return this.listTitles[item].title;
-          }
-      }
-      return 'Dashboard';
-    }
 }

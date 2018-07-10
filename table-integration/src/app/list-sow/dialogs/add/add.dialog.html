@@ -35,7 +35,10 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Created at" [(ngModel)]="data.created_at" name="created_at">
+        <!-- <input matInput placeholder="Created at" [(ngModel)]="data.created_at" name="created_at"> -->
+        <input matInput [matDatepicker]="picker" [(ngModel)]="data.created_at" placeholder="Created at" name="created_at">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
 

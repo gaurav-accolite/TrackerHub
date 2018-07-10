@@ -1,14 +1,16 @@
-<div class="resources-div">
-  <button (click)=display() class="resources-button">
-    Display
-  </button>
-  <button (click)=assign() class="resources-button">
-    Assign
-  </button>
-  <button (click)=release() class="resources-button">
-    Release
-  </button>
-  <button (click)=modifyEndDate() class="resources-button">
-    Modify End Date
-  </button>
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+            <mat-tab-group>
+              <mat-tab label="Free Resources">
+                <app-free-resources></app-free-resources>
+              </mat-tab>
+              <mat-tab label="Engaged Resources">
+                <app-engaged-resources></app-engaged-resources>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+      </div>
+  </div>
 </div>
