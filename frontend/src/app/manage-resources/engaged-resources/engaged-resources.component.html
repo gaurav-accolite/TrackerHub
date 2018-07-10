@@ -16,7 +16,7 @@
             
               <div class="form">
                 <mat-form-field floatPlaceholder="never" color="accent">
-                  <input matInput #filter placeholder="Filter issues">
+                  <input matInput #filter placeholder="Filter contents">
                 </mat-form-field>
               </div>
               <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
@@ -46,12 +46,12 @@
                 </ng-container>
             
                 <ng-container matColumnDef="start_date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date<br/>mm/dd/yyyy</mat-header-cell>
                   <mat-cell *matCellDef="let row"> {{row.start_date}}</mat-cell>
                 </ng-container>
             
                 <ng-container matColumnDef="end_date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date<br/>mm/dd/yyyy</mat-header-cell>
                   <mat-cell *matCellDef="let row"> {{row.end_date}}</mat-cell>
                 </ng-container>
 
@@ -66,6 +66,7 @@
                     <!-- <button mat-icon-button color="primary" (click)="addNew()">
                       <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
                     </button> -->
+                    Edit 
                   </mat-header-cell>
             
                   <mat-cell *matCellDef="let row; let i=index;">

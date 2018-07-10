@@ -4,9 +4,6 @@
   <div class="container-fluid">
       <div class="row">
           <div class="col-md-12">
-
-
-
             <mat-toolbar style="background-color:#F44336;color:#fff">
               <span>Free Resources</span>
               <span class="spacer" style="text-align:right;"></span>
@@ -14,15 +11,17 @@
                 <mat-icon>refresh</mat-icon>
               </button>
             </mat-toolbar>
-            
+            <!-- <div *ngFor="let post of sowDetails">
+                <h4>{{post.sow_id}}</h4>
+                <p>{{post.sow_name}}</p>
+              </div> -->
             <div class="container mat-elevation-z8">
             
               <div class="form">
                 <mat-form-field floatPlaceholder="never" color="accent">
-                  <input matInput #filter placeholder="Filter issues">
+                  <input matInput #filter placeholder="Filter contents">
                 </mat-form-field>
               </div>
-            
               <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
             
                 <!--- Note that these columns can be defined in any order.
@@ -34,30 +33,36 @@
                   <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="title">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.title}}</mat-cell>
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+                </ng-container>
+                
+            
+                <!-- <ng-container matColumnDef="sow_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>SoW Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_name}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="state">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>State</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.state}}</mat-cell>
+                <ng-container matColumnDef="project_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.project_name}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="url">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Url</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.url}}</mat-cell>
+                <ng-container matColumnDef="start_date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date<br/>dd-mm-yyyy</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.start_date}}</mat-cell>
                 </ng-container>
             
-                <ng-container matColumnDef="created_at">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Created at</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.created_at}}</mat-cell>
+                <ng-container matColumnDef="end_date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date<br/>dd-mm-yyyy</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.end_date}}</mat-cell>
                 </ng-container>
-            
-                <ng-container matColumnDef="updated_at">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Updated at</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.updated_at}}</mat-cell>
-                </ng-container>
+
+                <ng-container matColumnDef="remarks">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.remarks}}</mat-cell>
+                </ng-container> -->
             
                 <!-- actions -->
                 <ng-container matColumnDef="actions">
@@ -65,14 +70,15 @@
                     <!-- <button mat-icon-button color="primary" (click)="addNew()">
                       <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
                     </button> -->
+                    Assign
                   </mat-header-cell>
             
                   <mat-cell *matCellDef="let row; let i=index;">
-                    <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+                    <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.name, row.sow_name, row.project_name, row.start_date, row.end_date)">
                       <mat-icon aria-label="Edit">edit</mat-icon>
                     </button>
             
-                    <!-- <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+                    <!-- <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.name, row.sow_name, row.project_name)">
                       <mat-icon aria-label="Delete">delete</mat-icon>
                     </button> -->
                   </mat-cell>

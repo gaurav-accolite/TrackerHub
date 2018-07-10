@@ -10,8 +10,12 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class EREditDialogComponent {
 
+  minDate : Date;
+
   constructor(public dialogRef: MatDialogRef<EREditDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ERDataService) { }
+              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ERDataService) {
+                this.minDate = new Date(data.start_date);
+              }
 
   formControl = new FormControl('', [
     Validators.required

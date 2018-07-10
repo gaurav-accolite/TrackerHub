@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {
   MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule,
-  MatTableModule, MatToolbarModule, MatTabsModule
+  MatTableModule, MatToolbarModule, MatTabsModule, MatDatepickerModule, MatSelectModule
 } from '@angular/material';
 import {DataService} from './list-sow/services/data.service';
 import {ERDataService} from './manage-resources/engaged-resources/services/data.service'
-import { FRDataService } from './manage-resources/free-resources/services/data.service';
+import {FRDataService} from './manage-resources/free-resources/services/data.service';
+import {SowServiceService} from './manage-resources/free-resources/services/sow-service.service';
 import {AddDialogComponent} from './list-sow/dialogs/add/add.dialog.component';
 import {EditDialogComponent} from './list-sow/dialogs/edit/edit.dialog.component';
 import {DeleteDialogComponent} from './list-sow/dialogs/delete/delete.dialog.component';
@@ -54,6 +55,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     MatToolbarModule,
     MatTabsModule,
     MatPaginatorModule,
+    MatDatepickerModule,
+    MatSelectModule,
     ReactiveFormsModule,
 
     FormsModule,
@@ -99,7 +102,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   ],
   providers: [DataService,
               ERDataService,
-              FRDataService
+              FRDataService,
+              SowServiceService
             ],
   bootstrap: [AppComponent]
 })

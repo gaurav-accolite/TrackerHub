@@ -14,6 +14,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import {FRAddDialogComponent} from './dialogs/add/add.dialog.component';
 import {FREditDialogComponent} from './dialogs/edit/edit.dialog.component';
 import {FRDeleteDialogComponent} from './dialogs/delete/delete.dialog.component';
+import { SowServiceService } from './services/sow-service.service';
 
 @Component({
   selector: 'app-free-resources',
@@ -22,15 +23,18 @@ import {FRDeleteDialogComponent} from './dialogs/delete/delete.dialog.component'
 })
 export class FreeResourcesComponent implements OnInit {
 
-  displayedColumns = ['id', 'title', 'state', 'url', 'created_at', 'updated_at', 'actions'];
+  displayedColumns = ['id', 'name', 'actions'];
   exampleDatabase: FRDataService | null;
   dataSource: ExampleDataSource | null;
   index: number;
   id: number;
+  sowObj : Object;
 
   constructor(public httpClient: HttpClient,
               public dialog: MatDialog,
-              public dataService: FRDataService) {}
+              public dataService: FRDataService,
+              public sowDataService: SowServiceService
+              ) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -59,13 +63,13 @@ export class FreeResourcesComponent implements OnInit {
     });
   }
 
-  startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
+  startEdit(i: number, id: number, name: string) {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(FREditDialogComponent, {
-      data: {id: id, title: title, state: state, url: url, created_at: created_at, updated_at: updated_at}
+      data: {id: id, name: name}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -80,11 +84,11 @@ export class FreeResourcesComponent implements OnInit {
     });
   }
 
-  deleteItem(i: number, id: number, title: string, state: string, url: string) {
+  deleteItem(i: number, id: number, name: string) {
     this.index = i;
     this.id = id;
     const dialogRef = this.dialog.open(FRDeleteDialogComponent, {
-      data: {id: id, title: title, state: state, url: url}
+      data: {id: id, name: name}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -168,7 +172,7 @@ export class ExampleDataSource extends DataSource<Issue> {
     return Observable.merge(...displayDataChanges).map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-        const searchStr = (issue.id + issue.title + issue.url + issue.created_at).toLowerCase();
+        const searchStr = (issue.id + issue.name).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -198,11 +202,7 @@ export class ExampleDataSource extends DataSource<Issue> {
 
       switch (this._sort.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'title': [propertyA, propertyB] = [a.title, b.title]; break;
-        case 'state': [propertyA, propertyB] = [a.state, b.state]; break;
-        case 'url': [propertyA, propertyB] = [a.url, b.url]; break;
-        case 'created_at': [propertyA, propertyB] = [a.created_at, b.created_at]; break;
-        case 'updated_at': [propertyA, propertyB] = [a.updated_at, b.updated_at]; break;
+        case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
@@ -211,5 +211,4 @@ export class ExampleDataSource extends DataSource<Issue> {
       return (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1);
     });
   }
-
 }

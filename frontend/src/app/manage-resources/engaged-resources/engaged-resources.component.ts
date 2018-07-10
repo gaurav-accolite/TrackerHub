@@ -22,7 +22,7 @@ import {ERDeleteDialogComponent} from './dialogs/delete/delete.dialog.component'
   styleUrls: ['./engaged-resources.component.scss']
 })
 export class EngagedResourcesComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'sow_name', 'project_name', 'start_date', 'end_date', 'actions', 'remarks'];
+  displayedColumns = ['id', 'name', 'sow_name', 'project_name', 'start_date', 'end_date', 'remarks', 'actions'];
   exampleDatabase: ERDataService | null;
   dataSource: ExampleDataSource | null;
   index: number;
@@ -168,7 +168,8 @@ export class ExampleDataSource extends DataSource<Issue> {
     return Observable.merge(...displayDataChanges).map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-        const searchStr = (issue.id + issue.name + issue.project_name + issue.start_date).toLowerCase();
+        const searchStr = (issue.id + issue.name + issue.project_name + issue.start_date
+                          + issue.end_date + issue.sow_name + issue.remarks).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -203,6 +204,7 @@ export class ExampleDataSource extends DataSource<Issue> {
         case 'project_name': [propertyA, propertyB] = [a.project_name, b.project_name]; break;
         case 'start_date': [propertyA, propertyB] = [a.start_date, b.start_date]; break;
         case 'end_date': [propertyA, propertyB] = [a.end_date, b.end_date]; break;
+        case 'remarks': [propertyA, propertyB] = [a.remarks, b.remarks]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
