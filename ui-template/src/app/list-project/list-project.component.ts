@@ -47,6 +47,10 @@ export class ListProjectComponent implements OnInit {
     this.loadData();
   }
 
+  getExcel() {
+    window.open('http://10.4.15.45:8081/api/project/projectexcel/');
+  }
+
   addNew(issue: Issue) {
     const dialogRef = this.dialog.open(Add1DialogComponent, {
       data: {issue: issue }

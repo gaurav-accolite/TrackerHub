@@ -47,6 +47,10 @@ export class ListSowComponent implements OnInit {
     this.loadData();
   }
 
+  getExcel() {
+    window.open('http://10.4.15.45:8081/api/sow/sowexcel/');
+  }
+
   addNew(issue: Issue) {
     const dialogRef = this.dialog.open(AddDialogComponent, {
       data: {issue: issue }
@@ -60,6 +64,7 @@ export class ListSowComponent implements OnInit {
         this.refreshTable();
       }
     });
+    this.loadData();
   }
 
   startEdit(i: number, id: number, sow_id: number, sow_name: string, sow_budget: number, sow_status: string, sow_startdate: string,sow_enddate: string, client_id:number,remarks:string ) {
