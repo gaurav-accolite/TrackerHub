@@ -27,7 +27,7 @@ export class FREditDialogComponent {
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
+    // Validators.email
   ]);
 
   getErrorMessage() {
@@ -46,6 +46,7 @@ export class FREditDialogComponent {
 
   stopEdit(): void {
     this.dataService.updateIssue(this.data);
+    console.log(this.data);
   }
 
   addEvent(event: MatDatepickerInputEvent<Date>): void {

@@ -5,7 +5,8 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Injectable()
 export class ERDataService {
-  private readonly API_URL = 'http://localhost:3005/posts/';
+  // private readonly API_URL = 'http://localhost:3005/posts/';
+  private readonly API_URL = 'http://10.4.15.45:8081/api/resource/getAllResource';
 
   dataChange: BehaviorSubject<Issue[]> = new BehaviorSubject<Issue[]>([]);
   // Temporarily stores data from dialogs
@@ -30,14 +31,39 @@ export class ERDataService {
   // DEMO ONLY, you can find working methods below
   addIssue (issue: Issue): void {
     this.dialogData = issue;
+    this.addItem(issue);
   }
 
   updateIssue (issue: Issue): void {
-    this.dialogData = issue;
+//    this.addItem(issue);
   }
+
+  addItem(issue: Issue): void {
+    console.log(issue.id);
+    this.httpClient.put('http://10.4.15.45/api/resource/updateEnddate/' + issue.id, issue).subscribe(data => {
+      this.dialogData = issue;
+      // this.toasterService.showToaster('Successfully added', 3000);
+      },
+      (err: HttpErrorResponse) => {
+      // this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+    });
+   }
 
   deleteIssue (id: number): void {
     console.log(id);
+    this.deleteItem(id);
+  }
+
+  deleteItem(id: number): void {
+    console.log(id);
+    this.httpClient.delete("http://10.4.15.45/api/resource/deleteResource/"+id).
+    subscribe(data => console.log(data['']));
+  //       this.toasterService.showToaster('Successfully deleted', 3000);
+  //     },
+  //     (err: HttpErrorResponse) => {
+  //       this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+  //     }
+  //   );
   }
 }
 

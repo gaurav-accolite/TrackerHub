@@ -1,7 +1,9 @@
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Component, Inject} from '@angular/core';
 import {ERDataService} from '../../services/data.service';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {FormControl, Validators} from '@angular/forms';
+import {Issue} from '../../models/issue';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -11,6 +13,8 @@ import {FormControl, Validators} from '@angular/forms';
 export class EREditDialogComponent {
 
   minDate : Date;
+  issue : Issue;
+  endDate : string;
 
   constructor(public dialogRef: MatDialogRef<EREditDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ERDataService) {
@@ -37,6 +41,13 @@ export class EREditDialogComponent {
   }
 
   stopEdit(): void {
-    this.dataService.updateIssue(this.data);
+    this.issue = this.data;
+    this.issue.end_date = this.endDate;
+    this.dataService.addIssue(this.issue);
+    console.log(this.issue);
+  }
+
+  addEvent(event: MatDatepickerInputEvent<Date>): void {
+    this.endDate = (event.value.getMonth()+1)+"/"+event.value.getDate()+"/"+event.value.getFullYear();
   }
 }

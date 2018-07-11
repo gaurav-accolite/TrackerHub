@@ -16,7 +16,7 @@
       <mat-form-field color="accent">
         <!-- <textarea matInput #input class="form-control" placeholder="Name" [(ngModel)]="data.name" name="name" disabled ></textarea> -->
         <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error> -->
-        <textarea matInput placeholder="Name" [(ngModel)]="data.name" name="name" disabled ></textarea>
+        <input matInput placeholder="Name" [(ngModel)]="data.employeeName" name="employeeName" disabled >
       </mat-form-field>
     </div>
 
@@ -36,7 +36,7 @@
 
     <div class="form">
         <mat-form-field color="accent">
-            <mat-select placeholder="Select SOW" name="project" required>
+            <mat-select placeholder="Select Project" name="project" required>
                 <mat-option *ngFor="let detail of projectDetails" [value]="detail">
                   {{detail.project_id}} - {{detail.project_name}}
                 </mat-option>
@@ -67,14 +67,14 @@
       </mat-form-field> -->
     </div>
 
-    <div class="form">
+    <!-- <div class="form">
       <mat-form-field color="accent">
         <input matInput placeholder="Remarks" [(ngModel)]="data.remarks" name="remarks" required>
       </mat-form-field>
-    </div>
+    </div> -->
 
     <div mat-dialog-actions>
-      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
+      <button mat-button [type]="submit" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
       <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
     </div>
   </form>

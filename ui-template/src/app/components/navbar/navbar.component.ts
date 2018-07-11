@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
+import { NotificationService } from './service/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,10 +15,26 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    notificationCount : number;
+    details : Details;
+    employeesFreeOne : number;
+    employeesFreeTwo : number;
+    sowExpiredOne : number;
+    sowExpiredTwo : number;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
-      this.location = location;
-          this.sidebarVisible = false;
+    constructor(location: Location,  private element: ElementRef, private router: Router, 
+        private notificationService : NotificationService ) {
+            this.location = location;
+            this.sidebarVisible = false;
+            this.notificationCount = 4;
+            this.notificationService.getInfo().subscribe((details) => {
+                //this.details = details;
+                console.log(details);
+                this.employeesFreeOne = details.employeesFreeOne;
+                this.employeesFreeTwo = details.employeesFreeTwo;
+                this.sowExpiredOne = details.sowExpiredOne;
+                this.sowExpiredTwo = details.sowExpiredTwo;
+            });
     }
 
     ngOnInit(){
@@ -32,6 +49,10 @@ export class NavbarComponent implements OnInit {
            this.mobile_menu_visible = 0;
          }
      });
+    }
+
+    getEmpFreeOne() {
+        return this.employeesFreeOne;
     }
 
     sidebarOpen() {
@@ -120,4 +141,10 @@ export class NavbarComponent implements OnInit {
         title = arr.join(' ');
         return 'Dashboard - ' + title;
       }
+}
+interface Details{
+    employeesFreeOne : number;
+    employeesFreeTwo : number;
+    sowExpiredOne : number;
+    sowExpiredTwo : number;
 }

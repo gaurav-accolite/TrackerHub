@@ -172,7 +172,8 @@ export class ExampleDataSource extends DataSource<Issue> {
     return Observable.merge(...displayDataChanges).map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-        const searchStr = (issue.id + issue.employeeName + issue.workEmail).toLowerCase();
+        const searchStr = (issue.id + issue.employeeName + issue.workEmail + issue.sow_name +
+           issue.project_name + issue.start_date + issue.end_date).toString().toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 

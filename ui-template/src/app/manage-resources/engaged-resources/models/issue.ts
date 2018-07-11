@@ -5,5 +5,4 @@ export class Issue {
   project_name: string;
   start_date: string;
   end_date: string;
-  remarks: string;
 }

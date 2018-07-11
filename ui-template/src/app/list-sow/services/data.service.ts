@@ -9,8 +9,8 @@ export class DataService {
 
     //private readonly API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
-//  private readonly API_URL = 'http://10.4.15.45:8081/api/sow/getAllSOW';
-private readonly API_URL = 'http://localhost:3000/posts';
+ private readonly API_URL = 'http://10.4.15.45:8081/api/sow/getAllSOW';
+// private readonly API_URL = 'http://localhost:3000/posts';
   dataChange: BehaviorSubject<Issue[]> = new BehaviorSubject<Issue[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;

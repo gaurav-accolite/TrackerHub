@@ -5,8 +5,8 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Injectable()
 export class FRDataService {
-  // private readonly API_URL = 'http://10.4.15.45:8081/api/employee/freeResources';
-  private readonly API_URL = 'http://localhost:3000/posts';
+  private readonly API_URL = 'http://10.4.15.45:8081/api/employee/freeResources';
+  // private readonly API_URL = 'http://localhost:3000/posts';
 
   dataChange: BehaviorSubject<Issue[]> = new BehaviorSubject<Issue[]>([]);
   // Temporarily stores data from dialogs
@@ -40,6 +40,17 @@ export class FRDataService {
   updateIssue (issue: Issue): void {
     this.dialogData = issue;
   }
+
+  addItem(kanbanItem: Issue): void {
+    console.log(kanbanItem);
+    this.httpClient.post('http://10.4.15.45/api/resource', kanbanItem).subscribe(data => {
+      this.dialogData = kanbanItem;
+      // this.toasterService.showToaster('Successfully added', 3000);
+      },
+      (err: HttpErrorResponse) => {
+      // this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+    });
+   }
 
   deleteIssue (id: number): void {
     console.log(id);

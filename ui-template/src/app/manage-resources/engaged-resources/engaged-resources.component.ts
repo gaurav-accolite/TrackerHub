@@ -22,7 +22,7 @@ import {ERDeleteDialogComponent} from './dialogs/delete/delete.dialog.component'
   styleUrls: ['./engaged-resources.component.scss']
 })
 export class EngagedResourcesComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'sow_name', 'project_name', 'start_date', 'end_date', 'remarks', 'actions'];
+  displayedColumns = ['id', 'name', 'sow_name', 'project_name', 'start_date', 'end_date', 'actions'];
   exampleDatabase: ERDataService | null;
   dataSource: ExampleDataSource | null;
   index: number;
@@ -59,13 +59,13 @@ export class EngagedResourcesComponent implements OnInit {
     });
   }
 
-  startEdit(i: number, id: number, name: string, sow_name: string, project_name: string, start_date: string, end_date: string, remarks: string) {
+  startEdit(i: number, id: number, name: string, sow_name: string, project_name: string, start_date: string, end_date: string) {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(EREditDialogComponent, {
-      data: {id: id, name: name, sow_name: sow_name, project_name: project_name, start_date: start_date, end_date: end_date, remarks : remarks}
+      data: {id: id, name: name, sow_name: sow_name, project_name: project_name, start_date: start_date, end_date: end_date}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -169,7 +169,7 @@ export class ExampleDataSource extends DataSource<Issue> {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
         const searchStr = (issue.id + issue.name + issue.project_name + issue.start_date
-                          + issue.end_date + issue.sow_name + issue.remarks).toLowerCase();
+                          + issue.end_date + issue.sow_name).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -204,7 +204,6 @@ export class ExampleDataSource extends DataSource<Issue> {
         case 'project_name': [propertyA, propertyB] = [a.project_name, b.project_name]; break;
         case 'start_date': [propertyA, propertyB] = [a.start_date, b.start_date]; break;
         case 'end_date': [propertyA, propertyB] = [a.end_date, b.end_date]; break;
-        case 'remarks': [propertyA, propertyB] = [a.remarks, b.remarks]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

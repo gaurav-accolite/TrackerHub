@@ -50,6 +50,7 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { NotificationService } from './components/navbar/service/notification.service';
 
 @NgModule({
   imports: [
@@ -121,7 +122,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     FREditDialogComponent,
     FRDeleteDialogComponent
   ],
-  providers: [DataService, DataService2, ERDataService, FRDataService, SowServiceService, DatamService],
+  providers: [DataService, DataService2, ERDataService, 
+    FRDataService, SowServiceService, DatamService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
