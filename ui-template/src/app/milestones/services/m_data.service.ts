@@ -5,7 +5,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Injectable()
 export class DatamService {
-  private readonly API_URL = 'http://10.4.12.191:8081/api/sow_tracker/milestone';
+  private readonly API_URL = 'http://10.4.15.45:8081/api/milestone/';
 
   dataChange: BehaviorSubject<Issue[]> = new BehaviorSubject<Issue[]>([]);
   // Temporarily stores data from dialogs
@@ -33,57 +33,71 @@ export class DatamService {
 
   // DEMO ONLY, you can find working methods below
   addIssue (issue: Issue): void {
-    this.dialogData = issue;
+    this.httpClient.post(this.API_URL, issue).subscribe(data => {
+        this.dialogData = issue;
+        },
+        (err: HttpErrorResponse) => {
+      });
   }
 
   updateIssue (issue: Issue): void {
-    this.dialogData = issue;
+    this.httpClient.put(this.API_URL, issue).subscribe(data => {
+          this.dialogData = issue;
+        },
+        (err: HttpErrorResponse) => {
+        }
+      );
   }
 
   deleteIssue (id: number): void {
-    console.log(id);
+    this.httpClient.delete(this.API_URL + id).subscribe(data => {
+        console.log(data['']);
+        },
+        (err: HttpErrorResponse) => {
+        }
+      );
   }
 }
 
 
 
-/* REAL LIFE CRUD Methods I've used in my projects. ToasterService uses Material Toasts for displaying messages:
+// // REAL LIFE CRUD Methods I've used in my projects. ToasterService uses Material Toasts for displaying messages:
 
-    // ADD, POST METHOD
-    addItem(kanbanItem: KanbanItem): void {
-    this.httpClient.post(this.API_URL, kanbanItem).subscribe(data => {
-      this.dialogData = kanbanItem;
-      this.toasterService.showToaster('Successfully added', 3000);
-      },
-      (err: HttpErrorResponse) => {
-      this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-    });
-   }
+//     // ADD, POST METHOD
+//     addItem(issue: Issue): void {
+//     this.httpClient.post(this.API_URL, issue).subscribe(data => {
+//       this.dialogData = issue;
+//       this.toasterService.showToaster('Successfully added', 3000);
+//       },
+//       (err: HttpErrorResponse) => {
+//       this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+//     });
+//    }
 
-    // UPDATE, PUT METHOD
-     updateItem(kanbanItem: KanbanItem): void {
-    this.httpClient.put(this.API_URL + kanbanItem.id, kanbanItem).subscribe(data => {
-        this.dialogData = kanbanItem;
-        this.toasterService.showToaster('Successfully edited', 3000);
-      },
-      (err: HttpErrorResponse) => {
-        this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-      }
-    );
-  }
+//     // UPDATE, PUT METHOD
+//      updateItem(issue: Issue): void {
+//     this.httpClient.put(this.API_URL, issue).subscribe(data => {
+//         this.dialogData = issue;
+//         this.toasterService.showToaster('Successfully edited', 3000);
+//       },
+//       (err: HttpErrorResponse) => {
+//         this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+//       }
+//     );
+//   }
 
-  // DELETE METHOD
-  deleteItem(id: number): void {
-    this.httpClient.delete(this.API_URL + id).subscribe(data => {
-      console.log(data['']);
-        this.toasterService.showToaster('Successfully deleted', 3000);
-      },
-      (err: HttpErrorResponse) => {
-        this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-      }
-    );
-  }
-*/
+//   // DELETE METHOD
+//   deleteItem(id: number): void {
+//     this.httpClient.delete(this.API_URL + id).subscribe(data => {
+//       console.log(data['']);
+//         this.toasterService.showToaster('Successfully deleted', 3000);
+//       },
+//       (err: HttpErrorResponse) => {
+//         this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+//       }
+//     );
+//   }
+
 
 
 
