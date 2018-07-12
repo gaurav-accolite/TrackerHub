@@ -40,7 +40,7 @@ export class ERDataService {
 
   addItem(issue: Issue): void {
     console.log(issue.id);
-    this.httpClient.put('http://10.4.15.45/api/resource/updateEnddate/' + issue.id, issue).subscribe(data => {
+    this.httpClient.put('http://10.4.15.45:8081/api/resource/updateEnddate/' + issue.id, issue).subscribe(data => {
       this.dialogData = issue;
       // this.toasterService.showToaster('Successfully added', 3000);
       },
@@ -56,8 +56,13 @@ export class ERDataService {
 
   deleteItem(id: number): void {
     console.log(id);
-    this.httpClient.delete("http://10.4.15.45/api/resource/deleteResource/"+id).
-    subscribe(data => console.log(data['']));
+    this.httpClient.delete("http://10.4.15.45:8081/api/resource/deleteResource/"+id).
+    subscribe(data => {
+      console.log(data['']);
+    },
+    (err: HttpErrorResponse) => {
+    }
+  );
   //       this.toasterService.showToaster('Successfully deleted', 3000);
   //     },
   //     (err: HttpErrorResponse) => {
