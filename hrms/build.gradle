@@ -1,0 +1,89 @@
+buildscript {
+	ext {
+		 mapstructVersion = "1.2.0.CR1"
+		 jacocoVersion = "0.7.5+"
+		}
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+    }
+}
+
+plugins {
+    id "net.ltgt.apt" version "0.10"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
+apply plugin: 'war'
+
+
+sourceSets {
+    main {
+        main.java.srcDir "src/main/java"
+        main.resources.srcDir "src/main/resources"
+        test.java.srcDir "src/test/java"
+        test.resources.srcDir "src/test/resources"
+    }
+}
+
+// Generating the class files in bin folder
+sourceSets.main.output.classesDir = file("bin")
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+}
+
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+	//Springboot base and web dependencies
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter', version:'1.5.9.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.9.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.9.RELEASE'
+	compile group: 'com.h2database', name: 'h2', version: '1.4.196'
+	compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
+	compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'	
+	//MapStruct
+	compile "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
+   // testCompile 'org.testng:testng:6.10', 'org.easytesting:fest-assert:1.4'
+    apt "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    apt "org.projectlombok:lombok:1.16.18"
+    
+    //Apache POI for excel
+    compile "org.apache.poi:poi:3.17"	     // For `.xls` files
+	compile "org.apache.poi:poi-ooxml:3.17"	 // For `.xlsx` files
+	
+	compile group: 'commons-io', name: 'commons-io', version: '2.4'
+	
+    // Use JUnit test framework
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.9.RELEASE'
+    testCompile group: 'junit', name: 'junit'
+    
+}
+
+
+jacoco {
+        toolVersion = jacocoVersion
+    }
+
+jacocoTestReport {
+    reports {
+	  html.enabled = true
+	  xml.enabled = true
+	  csv.enabled = false
+    }
+ }
+ 
+ check.dependsOn jacocoTestReport
