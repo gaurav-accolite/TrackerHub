@@ -46,6 +46,10 @@ export class MilestonesComponent implements OnInit {
     this.loadData();
   }
 
+  getExcel() {
+    window.open('http://10.4.15.45:8081/api/milestoneexcel/');
+  }
+
   addNew(issue: Issue) {
     const dialogRef = this.dialog.open(AddmDialogComponent, {
       data: {issue: issue }
