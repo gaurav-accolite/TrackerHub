@@ -48,7 +48,7 @@ export class ListProjectComponent implements OnInit {
   }
 
   getExcel() {
-    window.open('http://10.4.15.45:8081/api/project/projectexcel/');
+    window.location.assign('http://10.4.15.45:8081/api/project/projectexcel/');
   }
 
   addNew(issue: Issue) {
@@ -62,17 +62,20 @@ export class ListProjectComponent implements OnInit {
         // For add we're just pushing a new row inside DataService
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
+        
+        this.refresh();
       }
     });
+    this.refreshTable();
   }
 
-  startEdit(i: number, id: number, sow_id: number, sow_name: string, sow_budget: number, sow_status: string, sow_startdate: string,sow_enddate: string, client_id:number,remarks:string ) {
-    this.id = id;
+  startEdit(i:number,project_id: number, sow_id: number, project_name: string, project_startdate: number, project_enddate: string) {
+    this.id = project_id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(Edit1DialogComponent, {
-      data: {id: id, sow_id:sow_id, sow_name:sow_name, sow_budget:sow_budget, sow_status:sow_status, sow_startdate: sow_startdate, sow_enddate:sow_enddate, client_id:client_id, remarks:remarks }
+      data: {project_id: this.id, sow_id:sow_id, project_name:project_name, project_startdate:project_startdate, project_enddate:project_enddate }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -83,15 +86,18 @@ export class ListProjectComponent implements OnInit {
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
         // And lastly refresh table
         this.refreshTable();
+        
+        this.refresh();
       }
     });
+    this.loadData();
   }
 
   deleteItem(i:number,project_id:number,sow_id:number,project_name:string,project_startdate:string,project_enddate:string) {
     this.index = i;
     this.id = project_id;
     const dialogRef = this.dialog.open(Delete1DialogComponent, {
-      data: {project_id: project_id, sow_id:sow_id, project_name:project_name, project_startdate:project_startdate, project_enddate:project_enddate}
+      data: {id: project_id, sow_id:sow_id, project_name:project_name, project_startdate:project_startdate, project_enddate:project_enddate}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -100,8 +106,11 @@ export class ListProjectComponent implements OnInit {
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+        
+        this.refresh();
       }
     });
+    this.loadData();
   }
 
 
@@ -186,6 +195,7 @@ export class ExampleDataSource extends DataSource<Issue> {
       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
       this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
       return this.renderedData;
+
     });
   }
   disconnect() {

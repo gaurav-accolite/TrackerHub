@@ -47,7 +47,7 @@ export class MilestonesComponent implements OnInit {
   }
 
   getExcel() {
-    window.open('http://10.4.15.45:8081/api/milestoneexcel/');
+    window.location.assign('http://10.4.15.45:8081/api/milestoneexcel/');
   }
 
   addNew(issue: Issue) {

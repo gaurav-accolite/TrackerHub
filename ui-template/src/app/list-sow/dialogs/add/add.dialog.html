@@ -3,13 +3,6 @@
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput  placeholder="data.id" [(ngModel)]="data.id"  name="id" required >
-
-      </mat-form-field>
-    </div>
-
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
@@ -36,6 +29,24 @@
 
       </mat-form-field>
     </div>
+
+    
+    <div class="form">
+      <mat-form-field color="accent">
+          <mat-select placeholder="sow_status" [(ngModel)]="data.sow_status" name="sow_status" >
+              <mat-option value="Draft">Draft</mat-option>
+              <mat-option value="Internal Signature in Progress">Internal Signature in Progress</mat-option>
+              <mat-option value=" Client Signature in Progress"> Client Signature in Progress</mat-option>
+              <mat-option value="Fully Executed">Fully Executed</mat-option>
+              <mat-option value=" Cancelled"> Cancelled</mat-option>
+              <mat-option value=" Expired"> Expired</mat-option>
+
+            </mat-select>
+  
+            
+      </mat-form-field>
+    </div>
+
 
     <div class="form">
         <mat-form-field color="accent">
@@ -70,23 +81,14 @@
         <!--Textarea for demo purposes-->
         <div class="form">
           <mat-form-field color="accent">
-            <textarea matInput #input  placeholder="remarks" [(ngModel)]="data.remarks" name="remarks" required ></textarea>
-    
+            <textarea matInput #input  placeholder="remarks" [(ngModel)]="data.remarks" name="remarks" required ></textarea>    
           </mat-form-field>
         </div>
 
-        <!--Contains mat-hint for characters count and has maxLengt set-->
-        <div class="form">
-            <mat-form-field color="accent">
-              <input matInput #inputstate  placeholder="sow_status" [(ngModel)]="data.sow_status" name="sow_status" maxlength="10" required >
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-              <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>    
-            </mat-form-field>
-          </div>
   
         <div class="form">
             <mat-form-field color="accent">
-                <mat-select placeholder="Select1" [(ngModel)]="data.currency_type" name="currency_type" >
+                <mat-select placeholder="Currency Type" [(ngModel)]="data.currency_type" name="currency_type" >
                     <mat-option value="INR">INR</mat-option>
                     <mat-option value="USD">USD</mat-option>
                     <mat-option value="EUR">EUR</mat-option>

@@ -9,9 +9,9 @@ export class DataService2 {
 
     //private readonly API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
-  //private readonly API_URL = 'http://10.4.15.45:8081/api/project/getAllProject';
+  private readonly API_URL = 'http://10.4.15.45:8081/api/project/getAllProject';
 
-  private readonly API_URL = 'http://localhost:4000/posts';
+  //private readonly API_URL = 'http://localhost:4000/posts';
   dataChange: BehaviorSubject<Issue[]> = new BehaviorSubject<Issue[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;
@@ -39,15 +39,51 @@ export class DataService2 {
   // DEMO ONLY, you can find working methods below
   addIssue (issue: Issue): void {
     this.dialogData = issue;
+    this.addItem(issue);
   }
 
   updateIssue (issue: Issue): void {
     this.dialogData = issue;
+    this.updateItem(issue);
   }
 
   deleteIssue (id: number): void {
     console.log(id);
+    this.deleteItem(id);
   }
+    // ADD, POST METHOD
+    addItem(issue: Issue): void {
+      this.httpClient.post("http://10.4.15.45:8081/api/project/", issue).subscribe(data => {
+        this.dialogData = issue;
+        console.log("Yeaaaaaaaaaaaaaaaaaaa");
+        },
+        (err: HttpErrorResponse) => {
+          console.log("Noooooooooooooooooo");
+        });
+     }
+  
+      // UPDATE, PUT METHOD
+      updateItem(kanbanItem: Issue): void {
+      this.httpClient.put("http://10.4.15.45:8081/api/project/updateProject/" + kanbanItem.project_id, kanbanItem).subscribe(data => {
+          this.dialogData = kanbanItem;
+          console.log("Yeaaaaaaaaaaaaaaaaaaa");
+        },
+        (err: HttpErrorResponse) => {
+          console.log("Noooooooooooooooooo");        }
+      );
+    }
+  
+    // DELETE METHOD
+    deleteItem(id: number): void {
+      this.httpClient.delete("http://10.4.15.45:8081/api/project/deleteProject/" + id).subscribe(data => {
+        console.log("Yeaaaaaaaaaaaaaaaaaaa");
+        },
+        (err: HttpErrorResponse) => {
+          console.log("Noooooooooooooooooo");        }
+      );
+    }
+  
+
 }
 
 

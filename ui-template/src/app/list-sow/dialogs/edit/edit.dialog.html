@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 mat-dialog-title>Issue id: {{data.id}}</h3>
+  <h3 mat-dialog-title>SOW No: {{data.id}}</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
@@ -21,17 +21,27 @@
     <!--Contains mat-hint for characters count and has maxLengt set-->
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #inputstate class="form-control" placeholder="sow_name" [(ngModel)]="data.sow_name" name="sow_name" maxlength="10" >
-        
-        <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
+        <input matInput placeholder="sow_name" [(ngModel)]="data.sow_name" name="sow_name">
+      </mat-form-field>
+  </div>
+  
+
+    <div class="form">
+      <mat-form-field color="accent">
+          <mat-select placeholder="sow_status" [(ngModel)]="data.sow_status" name="sow_status" >
+              <mat-option value="Draft">Draft</mat-option>
+              <mat-option value="Internal Signature in Progress">Internal Signature in Progress</mat-option>
+              <mat-option value=" Client Signature in Progress"> Client Signature in Progress</mat-option>
+              <mat-option value="Fully Executed">Fully Executed</mat-option>
+              <mat-option value=" Cancelled"> Cancelled</mat-option>
+              <mat-option value=" Expired"> Expired</mat-option>
+
+            </mat-select>
+  
+            
       </mat-form-field>
     </div>
 
-    <div class="form">
-        <mat-form-field color="accent">
-          <input matInput placeholder="sow_status" [(ngModel)]="data.sow_status" name="sow_status">
-        </mat-form-field>
-    </div>
 
     <div class="form">
         <mat-form-field>
@@ -48,11 +58,18 @@
             <mat-datepicker #pickersp>Start Date</mat-datepicker>
           </mat-form-field>    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="client_id" [(ngModel)]="data.client_id" name="client_id">
-      </mat-form-field>
-    </div>
+        <div class="form">
+            <mat-form-field color="accent">
+                <mat-select placeholder="client_Id" [(ngModel)]="data.client_id" name="client_id" >
+                    <mat-option value="500">Morgan Stanley</mat-option>
+                    <mat-option value="2">Fedex</mat-option>
+                    <mat-option value="3">Goldman Sachs</mat-option>
+                    <mat-option value="4">British Telecom</mat-option>
+                  </mat-select>
+        
+                  
+            </mat-form-field>
+          </div>  
 
     <div class="form">
         <mat-form-field color="accent">
@@ -61,12 +78,30 @@
       </div>
 
       
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="data.currency_type" [(ngModel)]="data.currency_type" name="currency_type">
-      </mat-form-field>
-    </div>
+      <div class="form">
+        <mat-form-field color="accent">
+            <mat-select placeholder="Currency Type" [(ngModel)]="data.currency_type" name="currency_type" >
+                <mat-option value="INR">INR</mat-option>
+                <mat-option value="USD">USD</mat-option>
+                <mat-option value="EUR">EUR</mat-option>
+                <mat-option value="SGD">SGD</mat-option>
+                <mat-option value="GBP">GBP</mat-option>
+              </mat-select>
+    
+              
+        </mat-form-field>
+      </div>
 
+        <!--Contains mat-hint for characters count and has maxLengt set-->
+        <div class="form">
+          <mat-form-field color="accent">
+            <input matInput #inputstate placeholder="remarks" [(ngModel)]="data.remarks" name="remarks" maxlength="10" >
+            
+            <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
+          </mat-form-field>
+        </div>
+
+        
     <div mat-dialog-actions>
       <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
       <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>

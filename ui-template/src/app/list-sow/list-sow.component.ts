@@ -48,7 +48,7 @@ export class ListSowComponent implements OnInit {
   }
 
   getExcel() {
-    window.open('http://10.4.15.45:8081/api/sow/sowexcel/');
+    window.location.assign('http://10.4.15.45:8081/api/sow/sowexcel/');
   }
 
   addNew(issue: Issue) {
@@ -62,18 +62,19 @@ export class ListSowComponent implements OnInit {
         // For add we're just pushing a new row inside DataService
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
+        this.refresh();
       }
     });
-    this.loadData();
+
   }
 
-  startEdit(i: number, id: number, sow_id: number, sow_name: string, sow_budget: number, sow_status: string, sow_startdate: string,sow_enddate: string, client_id:number,remarks:string ) {
+  startEdit(i: number, id: number, sow_id: number, sow_name: string, sow_budget: number, sow_status: string, sow_startdate: string,sow_enddate: string, client_id:number,currency_type:string,remarks:string ) {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(EditDialogComponent, {
-      data: {id: id, sow_id:sow_id, sow_name:sow_name, sow_budget:sow_budget, sow_status:sow_status, sow_startdate: sow_startdate, sow_enddate:sow_enddate, client_id:client_id, remarks:remarks }
+      data: {id: id, sow_id:sow_id, sow_name:sow_name, sow_budget:sow_budget, sow_status:sow_status, sow_startdate: sow_startdate, sow_enddate:sow_enddate, client_id:client_id,currency_type:currency_type, remarks:remarks }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -84,8 +85,11 @@ export class ListSowComponent implements OnInit {
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
         // And lastly refresh table
         this.refreshTable();
+        this.refresh();
       }
     });
+
+
   }
 
   deleteItem(i: number, id: number, sow_id: number, sow_name: string, sow_budget: number, sow_status: string, sow_startdate: string,sow_enddate: string, client_id:number,remarks:string) {
@@ -101,8 +105,11 @@ export class ListSowComponent implements OnInit {
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+        this.refresh();
       }
     });
+
+
   }
 
 
@@ -176,7 +183,7 @@ export class ExampleDataSource extends DataSource<Issue> {
     return Observable.merge(...displayDataChanges).map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-        const searchStr = (issue.id + issue.sow_id + issue.currency_type+issue.sow_name + issue.sow_budget+issue.sow_startdate+issue.sow_enddate+issue.client_id+issue.remarks).toLowerCase();
+        const searchStr = (issue.id + issue.sow_id + issue.sow_name+issue.sow_budget+issue.sow_status+issue.sow_startdate+issue.sow_enddate+issue.client_id + issue.currency_type+issue.remarks).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -212,6 +219,16 @@ export class ExampleDataSource extends DataSource<Issue> {
         // case 'created_at': [propertyA, propertyB] = [a.created_at, b.created_at]; break;
         // case 'updated_at': [propertyA, propertyB] = [a.updated_at, b.updated_at]; break;
         case 'sow_id': [propertyA, propertyB] = [a.sow_id, b.sow_id]; break;
+        case 'sow_status': [propertyA, propertyB] = [a.sow_status, b.sow_status]; break;
+
+        case 'sow_startdate': [propertyA, propertyB] = [a.sow_startdate, b.sow_startdate]; break;
+
+        case 'sow_enddate': [propertyA, propertyB] = [a.sow_enddate, b.sow_enddate]; break;
+
+        case 'currency_type': [propertyA, propertyB] = [a.currency_type, b.currency_type]; break;
+
+        case 'remarks': [propertyA, propertyB] = [a.remarks, b.remarks]; break;
+
         case 'sow_name': [propertyA, propertyB] = [a.sow_name, b.sow_name]; break;
         case 'sow_budget': [propertyA, propertyB] = [a.sow_budget, b.sow_budget]; break;
        // case 'sow_startdate': [propertyA, propertyB] = [a.sow_startdate, b.sow_startdate]; break;

@@ -14,7 +14,7 @@
                 <mat-icon>refresh</mat-icon>
               </button>
               <span class="example-fill-remaining-space"></span>
-                <button mat-raised-button layout-align="right" (click)="getExcel()"><span style="color:#929292">Export to XLSX</span></button>
+              <button mat-raised-button layout-align="right" (click)="getExcel()"><span style="color:#929292">Export to XLSX</span></button>
             </mat-toolbar>
             
             <div class="container mat-elevation-z8">
@@ -25,16 +25,7 @@
                 </mat-form-field>
               </div>
 
-              <div class="form">
-                  <mat-form-field color="accent">
-                      <mat-select placeholder="Clients">
-                          <mat-option *ngFor="let client of client_vals" [value]="client">
-                              {{client}}
-                            </mat-option>            
-                      </mat-select>          
-                  </mat-form-field>
-              </div>
-      
+
 
               <ul *ngFor="let d of issue">
                 <li>{{d.sow_id}}</li>
@@ -60,20 +51,20 @@
 
                                                   <!-- ID Column -->
                 <ng-container matColumnDef="project_name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>project_name</mat-header-cell>
                     <mat-cell *matCellDef="let row" >{{row.project_name}}</mat-cell>
                   </ng-container>
 
                                   <!-- ID Column -->
                 <ng-container matColumnDef="project_startdate">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Project StartDate</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >{{row.project_startdate}}</mat-cell>
+                    <mat-cell *matCellDef="let row" >{{row.project_startdate | date : 'MM/dd/yyyy'}}</mat-cell>
                   </ng-container>
 
                                   <!-- ID Column -->
                 <ng-container matColumnDef="project_enddate">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Project EndDate</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >{{row.project_enddate}}</mat-cell>
+                    <mat-cell *matCellDef="let row" >{{row.project_enddate | date : 'MM/dd/yyyy'}}</mat-cell>
                   </ng-container>
   
 

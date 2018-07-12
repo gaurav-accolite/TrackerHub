@@ -58,12 +58,12 @@
             
                 <ng-container matColumnDef="sow_startdate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.sow_startdate}}</mat-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_startdate | date : 'MM/dd/yyyy'}}</mat-cell>
                 </ng-container>
             
                 <ng-container matColumnDef="sow_enddate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.sow_enddate}}</mat-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sow_enddate| date : 'MM/dd/yyyy'}}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="client_id">
@@ -90,7 +90,7 @@
                   </mat-header-cell>
             
                   <mat-cell *matCellDef="let row; let i=index;">
-                    <button mat-icon-button color="accent" (click)="startEdit(i, row.id,row.sow_id,row.sow_name,row.sow_budget,row.sow_status,
+                    <button mat-icon-button color="accent" (click)="startEdit(i,row.id,row.sow_id,row.sow_name,row.sow_budget,row.sow_status,
                     row.sow_startdate,row.sow_enddate,row.client_id,row.currency_type,row.remarks)">
                       <mat-icon aria-label="Edit">edit</mat-icon>
                     </button>

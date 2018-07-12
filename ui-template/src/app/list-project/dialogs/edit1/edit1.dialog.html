@@ -1,42 +1,41 @@
 <div class="container">
-  <h3 mat-dialog-title>Issue id: {{data.id}}</h3>
+  <h3 mat-dialog-title>Edit Project {{data.project_id}}</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
       <div class="form">
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" placeholder="data.project_id" [(ngModel)]="data.project_id" name="project_id" >
+            <input matInput #input  placeholder="project_id" [(ngModel)]="data.project_id" name="project_id" >
             </mat-form-field>
         </div>
     
         <!--Textarea for demo purposes-->
         <div class="form">
           <mat-form-field color="accent">
-            <textarea matInput #input class="form-control" placeholder="sow_id" [(ngModel)]="data.sow_id" name="sow_id" ></textarea>
+            <textarea matInput #input  placeholder="sow_id" [(ngModel)]="data.sow_id" name="sow_id" ></textarea>
             </mat-form-field>
         </div>
     
         <!--Contains mat-hint for characters count and has maxLengt set-->
         <div class="form">
           <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" placeholder="project_name" [(ngModel)]="data.project_name" name="project_name" maxlength="10" >
+            <input matInput #inputstate  placeholder="project_name" [(ngModel)]="data.project_name" name="project_name" maxlength="10" >
             <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
           </mat-form-field>
         </div>
     
         <div class="form">
-            <mat-form-field>
-                <input matInput [matDatepicker]="editst" [(ngModel)]="data.project_startdate" name="project_startdate" placeholder="data.project_startdate">
-                <mat-datepicker-toggle matSuffix [for]="editst"></mat-datepicker-toggle>
-                <mat-datepicker #editst>Start Date</mat-datepicker>
-              </mat-form-field>
-        </div>
-    
+          <mat-form-field>
+              <input matInput [matDatepicker]="hel1" [(ngModel)]="data.project_startdate" name="project_startdate" placeholder="project_startdate">
+              <mat-datepicker-toggle matSuffix [for]="hel1"></mat-datepicker-toggle>
+              <mat-datepicker #hel1>Start Date</mat-datepicker>
+            </mat-form-field>    </div>
+
         <div class="form">
             <mat-form-field>
-                <input matInput [matDatepicker]="editsp" [(ngModel)]="data.product_enddate" name="product_enddate" placeholder="data.product_enddate">
+                <input matInput [matDatepicker]="editsp" [(ngModel)]="data.project_enddate" name="project_enddate" placeholder="project_enddate">
                 <mat-datepicker-toggle matSuffix [for]="editsp"></mat-datepicker-toggle>
-                <mat-datepicker #editsp>Start Date</mat-datepicker>
+                <mat-datepicker #editsp>End Date</mat-datepicker>
               </mat-form-field>    </div>
 
     <div mat-dialog-actions>

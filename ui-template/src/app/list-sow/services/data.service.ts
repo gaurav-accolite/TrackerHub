@@ -62,7 +62,6 @@ export class DataService {
      }
 
      updateItem(issue: Issue): void {
-       console.log(issue);
       this.httpClient.put("http://10.4.15.45:8081/api/sow/updateSow/" + issue.id, issue).subscribe(data => {
           this.dialogData = issue;
         },
