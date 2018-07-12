@@ -6,7 +6,7 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <textarea matInput #input  placeholder="sow_id" [(ngModel)]="data.sow_id" name="sow_id" required ></textarea>
+        <textarea matInput #input  placeholder="Sow id" [(ngModel)]="data.sow_id" name="sow_id" required ></textarea>
 
       </mat-form-field>
     </div>
@@ -15,7 +15,7 @@
         <!--Contains mat-hint for characters count and has maxLengt set-->
         <div class="form">
           <mat-form-field color="accent">
-            <input matInput #inputstate  placeholder="sow_name" [(ngModel)]="data.sow_name" name="sow_name" maxlength="10" required >
+            <input matInput #inputstate  placeholder="Sow name" [(ngModel)]="data.sow_name" name="sow_name" maxlength="10" required >
             <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
           </mat-form-field>
         </div>
@@ -25,7 +25,7 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <textarea matInput #input  placeholder="sow_budget" [(ngModel)]="data.sow_budget" name="sow_budget" required ></textarea>
+        <textarea matInput #input  placeholder="Sow budget" [(ngModel)]="data.sow_budget" name="sow_budget" required ></textarea>
 
       </mat-form-field>
     </div>
@@ -33,7 +33,7 @@
     
     <div class="form">
       <mat-form-field color="accent">
-          <mat-select placeholder="sow_status" [(ngModel)]="data.sow_status" name="sow_status" >
+          <mat-select placeholder="Sow status" [(ngModel)]="data.sow_status" name="sow_status" >
               <mat-option value="Draft">Draft</mat-option>
               <mat-option value="Internal Signature in Progress">Internal Signature in Progress</mat-option>
               <mat-option value=" Client Signature in Progress"> Client Signature in Progress</mat-option>
@@ -50,7 +50,7 @@
 
     <div class="form">
         <mat-form-field color="accent">
-            <input matInput [matDatepicker]="picker_start" [(ngModel)]="data.sow_startdate" name="sow_startdate" placeholder="Choose a date">
+            <input matInput [matDatepicker]="picker_start" [(ngModel)]="data.sow_startdate" name="sow_startdate" placeholder="Choose Start date">
             <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
             <mat-datepicker #picker_start></mat-datepicker>
           </mat-form-field>
@@ -58,7 +58,7 @@
 
     <div class="form">
         <mat-form-field>
-            <input matInput [matDatepicker]="picker_end" [(ngModel)]="data.sow_enddate" name="sow_enddate" placeholder="Choose a date">
+            <input matInput [matDatepicker]="picker_end" [(ngModel)]="data.sow_enddate" name="sow_enddate" placeholder="Choose End date">
             <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
             <mat-datepicker #picker_end>End Date</mat-datepicker>
           </mat-form-field>
@@ -67,7 +67,7 @@
         <!--Textarea for demo purposes-->
         <div class="form">
             <mat-form-field color="accent">
-                <mat-select placeholder="client_Id" [(ngModel)]="data.client_id" name="client_id" >
+                <mat-select placeholder="Client Id" [(ngModel)]="data.client_id" name="client_id" >
                     <mat-option value="500">Morgan Stanley</mat-option>
                     <mat-option value="2">Fedex</mat-option>
                     <mat-option value="3">Goldman Sachs</mat-option>
@@ -81,7 +81,7 @@
         <!--Textarea for demo purposes-->
         <div class="form">
           <mat-form-field color="accent">
-            <textarea matInput #input  placeholder="remarks" [(ngModel)]="data.remarks" name="remarks" required ></textarea>    
+            <textarea matInput #input  placeholder="Remarks" [(ngModel)]="data.remarks" name="remarks" required ></textarea>    
           </mat-form-field>
         </div>
 
@@ -100,12 +100,6 @@
             </mat-form-field>
           </div>
 
-          <div class="form">
-            <label for="file">Choose File</label>
-            <input type="file"
-                   id="file"
-                   (change)="handleFileInput($event.target.files)">
-        </div>
 
     <div mat-dialog-actions>
       <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>

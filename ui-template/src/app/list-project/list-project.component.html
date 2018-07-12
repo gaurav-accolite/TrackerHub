@@ -21,7 +21,7 @@
             
               <div class="form">
                 <mat-form-field floatPlaceholder="never" color="accent">
-                  <input matInput #filter placeholder="Filter issues">
+                  <input matInput #filter placeholder="Filter contents">
                 </mat-form-field>
               </div>
 
@@ -39,19 +39,19 @@
             
                 <!-- ID Column -->
                 <ng-container matColumnDef="project_id">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>project_id</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Project id</mat-header-cell>
                   <mat-cell *matCellDef="let row" >{{row.project_id}}</mat-cell>
                 </ng-container>
             
                                 <!-- ID Column -->
                                 <ng-container matColumnDef="sow_id">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>sow_id</mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Sow id</mat-header-cell>
                                     <mat-cell *matCellDef="let row" >{{row.sow_id}}</mat-cell>
                                   </ng-container>
 
                                                   <!-- ID Column -->
                 <ng-container matColumnDef="project_name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>project_name</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Project name</mat-header-cell>
                     <mat-cell *matCellDef="let row" >{{row.project_name}}</mat-cell>
                   </ng-container>
 

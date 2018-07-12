@@ -13,7 +13,7 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="sow_Id" [(ngModel)]="data.sow_id" name="sow_id" ></textarea>
+        <textarea matInput #input class="form-control" placeholder="Sow Id" [(ngModel)]="data.sow_id" name="sow_id" ></textarea>
         
       </mat-form-field>
     </div>
@@ -21,14 +21,14 @@
     <!--Contains mat-hint for characters count and has maxLengt set-->
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="sow_name" [(ngModel)]="data.sow_name" name="sow_name">
+        <input matInput placeholder="Sow name" [(ngModel)]="data.sow_name" name="sow_name">
       </mat-form-field>
   </div>
   
 
     <div class="form">
       <mat-form-field color="accent">
-          <mat-select placeholder="sow_status" [(ngModel)]="data.sow_status" name="sow_status" >
+          <mat-select placeholder="Sow status" [(ngModel)]="data.sow_status" name="sow_status" >
               <mat-option value="Draft">Draft</mat-option>
               <mat-option value="Internal Signature in Progress">Internal Signature in Progress</mat-option>
               <mat-option value=" Client Signature in Progress"> Client Signature in Progress</mat-option>
@@ -60,7 +60,7 @@
 
         <div class="form">
             <mat-form-field color="accent">
-                <mat-select placeholder="client_Id" [(ngModel)]="data.client_id" name="client_id" >
+                <mat-select placeholder="{{data.client_id}}" [(ngModel)]="data.client_id" name="client_id" >
                     <mat-option value="500">Morgan Stanley</mat-option>
                     <mat-option value="2">Fedex</mat-option>
                     <mat-option value="3">Goldman Sachs</mat-option>
@@ -73,7 +73,7 @@
 
     <div class="form">
         <mat-form-field color="accent">
-          <input matInput placeholder="sow_budget" [(ngModel)]="data.sow_budget" name="sow_budget">
+          <input matInput placeholder="Sow budget" [(ngModel)]="data.sow_budget" name="sow_budget">
         </mat-form-field>
       </div>
 
@@ -95,7 +95,7 @@
         <!--Contains mat-hint for characters count and has maxLengt set-->
         <div class="form">
           <mat-form-field color="accent">
-            <input matInput #inputstate placeholder="remarks" [(ngModel)]="data.remarks" name="remarks" maxlength="10" >
+            <input matInput #inputstate placeholder="Remarks" [(ngModel)]="data.remarks" name="remarks" maxlength="10" >
             
             <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
           </mat-form-field>
