@@ -39,11 +39,12 @@ export class FRDataService {
 
   updateIssue (issue: Issue): void {
     this.dialogData = issue;
+    this.addItem(issue);
   }
 
   addItem(kanbanItem: Issue): void {
     console.log(kanbanItem);
-    this.httpClient.post('http://10.4.15.45/api/resource', kanbanItem).subscribe(data => {
+    this.httpClient.post('http://10.4.15.45:8081/api/resource', kanbanItem).subscribe(data => {
       this.dialogData = kanbanItem;
       // this.toasterService.showToaster('Successfully added', 3000);
       },

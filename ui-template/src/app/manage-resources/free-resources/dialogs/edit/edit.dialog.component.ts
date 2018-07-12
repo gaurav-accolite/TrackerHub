@@ -4,6 +4,7 @@ import {FRDataService} from '../../services/data.service';
 import {FormControl, Validators} from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {SowServiceService} from '../../services/sow-service.service';
+import {Issue} from '../../models/issue';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -13,6 +14,8 @@ import {SowServiceService} from '../../services/sow-service.service';
 export class FREditDialogComponent {
 
   startDate : Date;
+  endDate : Date;
+  issue : Issue;
   sowDetails : SoWDetails[];
   projectDetails : Projects[];
 
@@ -45,13 +48,21 @@ export class FREditDialogComponent {
   }
 
   stopEdit(): void {
-    this.dataService.updateIssue(this.data);
-    console.log(this.data);
+    this.issue = this.data;
+    this.issue.start_date = this.startDate.getTime();
+    this.issue.end_date = this.endDate.getTime();
+    this.dataService.updateIssue(this.issue);
+    console.log(this.issue);
   }
 
   addEvent(event: MatDatepickerInputEvent<Date>): void {
     console.log(event.value);
     this.startDate = event.value;
+  }
+
+  addEndEvent(event: MatDatepickerInputEvent<Date>): void {
+    console.log(event.value);
+    this.endDate = event.value;
   }
 
   changeEvent(value : any)

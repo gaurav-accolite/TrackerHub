@@ -31,7 +31,7 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Start date" [(ngModel)]="data.start_date" name="start_date" disabled>
+        <input matInput placeholder="Start date" value="{{data.start_date | date:'MM/dd/yyyy'}}" name="start_date" disabled>
       </mat-form-field>
     </div>
 

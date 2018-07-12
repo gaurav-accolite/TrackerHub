@@ -14,7 +14,7 @@ export class EREditDialogComponent {
 
   minDate : Date;
   issue : Issue;
-  endDate : string;
+  endDate : Date;
 
   constructor(public dialogRef: MatDialogRef<EREditDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ERDataService) {
@@ -42,12 +42,12 @@ export class EREditDialogComponent {
 
   stopEdit(): void {
     this.issue = this.data;
-    this.issue.end_date = this.endDate;
+    this.issue.end_date = this.endDate.getTime();
     this.dataService.addIssue(this.issue);
     console.log(this.issue);
   }
 
   addEvent(event: MatDatepickerInputEvent<Date>): void {
-    this.endDate = (event.value.getMonth()+1)+"/"+event.value.getDate()+"/"+event.value.getFullYear();
+    this.endDate = event.value;
   }
 }

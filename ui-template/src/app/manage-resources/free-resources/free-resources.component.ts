@@ -23,7 +23,7 @@ import { SowServiceService } from './services/sow-service.service';
 })
 export class FreeResourcesComponent implements OnInit {
 
-  displayedColumns = ['id', 'employeeName', 'workEmail',  'actions'];
+  displayedColumns = ['id', 'employeeName',  'actions'];
   exampleDatabase: FRDataService | null;
   dataSource: ExampleDataSource | null;
   index: number;
@@ -63,13 +63,13 @@ export class FreeResourcesComponent implements OnInit {
     });
   }
 
-  startEdit(i: number, id: number, employeeName: string, workEmail: string) {
+  startEdit(i: number, id: number, employeeName: string) {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(FREditDialogComponent, {
-      data: {id: id, employeeName: employeeName, workEmail: workEmail}
+      data: {id: id, employeeName: employeeName}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -84,11 +84,11 @@ export class FreeResourcesComponent implements OnInit {
     });
   }
 
-  deleteItem(i: number, id: number, employeeName: string, workEmail: string) {
+  deleteItem(i: number, id: number, employeeName: string) {
     this.index = i;
     this.id = id;
     const dialogRef = this.dialog.open(FRDeleteDialogComponent, {
-      data: {id: id, employeeName: employeeName, workEmail: workEmail}
+      data: {id: id, employeeName: employeeName}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -172,7 +172,7 @@ export class ExampleDataSource extends DataSource<Issue> {
     return Observable.merge(...displayDataChanges).map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-        const searchStr = (issue.id + issue.employeeName + issue.workEmail + issue.sow_name +
+        const searchStr = (issue.id + issue.employeeName + issue.sow_name +
            issue.project_name + issue.start_date + issue.end_date).toString().toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
@@ -204,7 +204,6 @@ export class ExampleDataSource extends DataSource<Issue> {
       switch (this._sort.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
         case 'employeeName': [propertyA, propertyB] = [a.employeeName, b.employeeName]; break;
-        case 'workEmail': [propertyA, propertyB] = [a.workEmail,b.workEmail];break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

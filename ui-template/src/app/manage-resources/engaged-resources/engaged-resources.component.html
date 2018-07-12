@@ -48,12 +48,12 @@
             
                 <ng-container matColumnDef="start_date">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date<br/>mm/dd/yyyy</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.start_date}}</mat-cell>
+                  <mat-cell *matCellDef="let row"> {{row.start_date | date : 'MM/dd/yyyy'}}</mat-cell>
                 </ng-container>
             
                 <ng-container matColumnDef="end_date">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>End Date<br/>mm/dd/yyyy</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.end_date}}</mat-cell>
+                  <mat-cell *matCellDef="let row"> {{row.end_date | date : 'MM/dd/yyyy'}}</mat-cell>
                 </ng-container>
 
                 <!-- <ng-container matColumnDef="remarks">

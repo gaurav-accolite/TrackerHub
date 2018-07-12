@@ -59,7 +59,7 @@ export class EngagedResourcesComponent implements OnInit {
     });
   }
 
-  startEdit(i: number, id: number, name: string, sow_name: string, project_name: string, start_date: string, end_date: string) {
+  startEdit(i: number, id: number, name: string, sow_name: string, project_name: string, start_date: number, end_date: number) {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
