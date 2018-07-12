@@ -12,6 +12,11 @@ import {Issue} from '../../models/issue';
 
 export class AddDialogComponent {
   selected = 'option2';
+  fileToUpload: File = null;
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+}
+
 
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Issue,

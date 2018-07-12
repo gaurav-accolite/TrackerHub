@@ -6,7 +6,7 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="milesteone" [(ngModel)]="data.milesteone_name" name="milesteone_name" required ></textarea>
+        <textarea matInput #input placeholder="milestone" [(ngModel)]="data.milestone_name" name="milestone_name" required ></textarea>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
@@ -14,23 +14,27 @@
     <!--Contains mat-hint for characters count and has maxLengt set-->
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #inputstate class="form-control" placeholder="Project Id" [(ngModel)]="data.project_id" name="project_id" maxlength="10" required >
+        <input matInput #inputstate placeholder="Project Id" [(ngModel)]="data.project_id" name="project_id" maxlength="10" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
       </mat-form-field>
     </div>
 
     <div class="form">
-        <mat-form-field color="accent">
-          <input matInput placeholder="Start Date" [(ngModel)]="data.startdate" name="startdate">
+      <mat-form-field color="accent">
+          <input matInput [matDatepicker]="picker_start" [(ngModel)]="data.startdate" name="startdate" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
+          <mat-datepicker #picker_start></mat-datepicker>
         </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="End Date" [(ngModel)]="data.enddate" name="enddate">
-      </mat-form-field>
-    </div>
+          <input matInput [matDatepicker]="picker_end" [(ngModel)]="data.enddate" name="enddate" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
+          <mat-datepicker #picker_end>End Date</mat-datepicker>
+        </mat-form-field>
+  </div>
 
     <div class="form">
       <mat-form-field color="accent">
