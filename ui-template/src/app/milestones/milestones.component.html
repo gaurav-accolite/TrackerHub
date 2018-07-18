@@ -1,0 +1,107 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+
+
+            <mat-card>
+            <mat-toolbar style="background-color:#F44336;color:white">
+              <span>Milestones</span><pre>   </pre>
+              <button mat-icon-button (click)="refresh()">
+                <mat-icon>refresh</mat-icon>
+              </button>
+                <span class="example-fill-remaining-space"></span>
+                <button mat-raised-button layout-align="right" (click)="getExcel()"><span style="color:#929292">Export to XLSX</span></button>
+            </mat-toolbar>
+            
+            <div class="container mat-elevation-z8">
+            
+              <div class="form">
+                <mat-form-field floatPlaceholder="never" color="accent">
+                  <input matInput #filter placeholder="Filter issues">
+                </mat-form-field>
+              </div>
+            
+              <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+            
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+            
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                  <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="milestone_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>MilestoneName</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.milestone_name}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="project_id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Project Id</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.project_id}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="startdate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>StartDate</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.startdate | date : 'MM/dd/yyyy'}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="enddate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>EndDate</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.enddate | date : 'MM/dd/yyyy'  }}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.status}}</mat-cell>
+                </ng-container>
+            
+               
+            
+                <!-- actions -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef>
+                    <button mat-icon-button color="primary" (click)="addNew()">
+                      <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                    </button>
+                  </mat-header-cell>
+            
+                  <mat-cell *matCellDef="let row; let i=index;">
+                    <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.milestone_name, row.project_id, row.startdate, row.enddate, row.status)">
+                      <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+            
+                    <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.milestone_name, row.project_id, row.startdate, row.enddate, row.status)">
+                      <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+            
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            
+            
+              <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+                No results
+              </div>
+            
+              <mat-paginator #paginator
+                             [length]="dataSource.filteredData.length"
+                             [pageIndex]="0"
+                             [pageSize]="10"
+                             [pageSizeOptions]="[5, 10, 25, 100]">
+              </mat-paginator>
+            </div>
+            
+          </mat-card>
+          </div>
+      </div>
+  </div>
+</div>
+
+

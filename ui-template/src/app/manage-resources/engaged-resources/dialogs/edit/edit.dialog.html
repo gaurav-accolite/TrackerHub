@@ -1,0 +1,54 @@
+<div class="container">
+  <h3 mat-dialog-title>Employee id: {{data.id}}</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Id" [(ngModel)]="data.id" name="id" disabled >
+      </mat-form-field>
+    </div>
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea matInput placeholder="Name" [(ngModel)]="data.name" name="name" disabled ></textarea>
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="SOW" [(ngModel)]="data.sow_name" name="sow_name" disabled >
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="Project" [(ngModel)]="data.project_name" name="project_name" disabled>
+        </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Start date" value="{{data.start_date | date:'MM/dd/yyyy'}}" name="start_date" disabled>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <!-- <mat-form-field color="accent">
+        <input matInput placeholder="End date" [(ngModel)]="data.end_date" name="end_date">
+      </mat-form-field> -->
+      <mat-form-field>
+          <input matInput [matDatepicker]="picker" [min]="minDate" (dateChange)="addEvent($event)"  placeholder="End date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

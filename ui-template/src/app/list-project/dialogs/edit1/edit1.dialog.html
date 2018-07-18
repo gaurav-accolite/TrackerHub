@@ -1,0 +1,46 @@
+<div class="container">
+  <h3 mat-dialog-title>Edit Project {{data.project_id}}</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+      <div class="form">
+          <mat-form-field color="accent">
+            <input matInput #input  placeholder="Project id" [(ngModel)]="data.project_id" name="project_id" >
+            </mat-form-field>
+        </div>
+    
+        <!--Textarea for demo purposes-->
+        <div class="form">
+          <mat-form-field color="accent">
+            <textarea matInput #input  placeholder="Sow id" [(ngModel)]="data.sow_id" name="sow_id" ></textarea>
+            </mat-form-field>
+        </div>
+    
+        <!--Contains mat-hint for characters count and has maxLengt set-->
+        <div class="form">
+          <mat-form-field color="accent">
+            <input matInput #inputstate  placeholder="Project name" [(ngModel)]="data.project_name" name="project_name" maxlength="10" >
+            <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
+          </mat-form-field>
+        </div>
+    
+        <div class="form">
+          <mat-form-field>
+              <input matInput [matDatepicker]="hel1" [(ngModel)]="data.project_startdate" name="project_startdate" placeholder="Project startdate">
+              <mat-datepicker-toggle matSuffix [for]="hel1"></mat-datepicker-toggle>
+              <mat-datepicker #hel1>Start Date</mat-datepicker>
+            </mat-form-field>    </div>
+
+        <div class="form">
+            <mat-form-field>
+                <input matInput [matDatepicker]="editsp" [(ngModel)]="data.project_enddate" name="project_enddate" placeholder="Project enddate">
+                <mat-datepicker-toggle matSuffix [for]="editsp"></mat-datepicker-toggle>
+                <mat-datepicker #editsp>End Date</mat-datepicker>
+              </mat-form-field>    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

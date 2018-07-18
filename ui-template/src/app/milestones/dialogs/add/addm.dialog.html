@@ -1,0 +1,50 @@
+<div class="container">
+  <h3 mat-dialog-title>Add new Milestone</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea matInput placeholder="Milestone-Name" [(ngModel)]="data.milestone_name" name="milestone_name" required ></textarea>
+        <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error> -->
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Project-Id" [(ngModel)]="data.project_id" name="project_id"  required >
+        <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint> -->
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field color="accent">
+            <input matInput [matDatepicker]="picker_start" [(ngModel)]="data.startdate" name="startdate" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
+            <mat-datepicker #picker_start></mat-datepicker>
+          </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field color="accent">
+            <input matInput [matDatepicker]="picker_end" [(ngModel)]="data.enddate" name="enddate" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
+            <mat-datepicker #picker_end>End Date</mat-datepicker>
+          </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Status" [(ngModel)]="data.status" name="status">
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

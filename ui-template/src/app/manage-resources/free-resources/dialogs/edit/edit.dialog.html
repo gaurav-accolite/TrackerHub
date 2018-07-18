@@ -1,0 +1,90 @@
+<div class="container">
+  <h3 mat-dialog-title>Employee id: {{data.id}}</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <!-- <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.id" name="id" disabled > -->
+        <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error> -->
+        <input matInput placeholder="Id" [(ngModel)]="data.id" name="id" disabled >
+      </mat-form-field>
+    </div>
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <!-- <textarea matInput #input class="form-control" placeholder="Name" [(ngModel)]="data.name" name="name" disabled ></textarea> -->
+        <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error> -->
+        <input matInput placeholder="Name" value="{{data.employeeName}}" name="employeeName" disabled >
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="SOW" [(ngModel)]="data.sow_name" name="sow_name" required>
+        <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint> -->
+        <!-- <mat-select placeholder="Select SOW" name="sow" (change)="changeEvent($event.value)" required>
+            <mat-option *ngFor="let detail of sowDetails" [value]="detail.sow_id">
+              {{detail.sow_id}} - {{detail.sow_name}}
+            </mat-option>
+          </mat-select> -->
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field color="accent">
+            <input matInput placeholder="Project" [(ngModel)]="data.project_name" name="project_name" required>
+            <!-- <mat-select placeholder="Select Project" name="project" required>
+                <mat-option *ngFor="let detail of projectDetails" [value]="detail">
+                  {{detail.project_id}} - {{detail.project_name}}
+                </mat-option>
+              </mat-select> -->
+        </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker_start" placeholder="Start date" 
+            (dateChange)="addEvent($event)" required>
+            <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
+            <mat-datepicker #picker_start></mat-datepicker>
+          </mat-form-field>
+      <!-- <mat-form-field color="accent">
+        <input matInput placeholder="Start Date" [(ngModel)]="data.start_date" name="start_date" required>
+      </mat-form-field> -->
+    </div>
+
+    <div class="form">
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker_end" [min]="startDate" 
+            (dateChange)="addEndEvent($event)" placeholder="End date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
+            <mat-datepicker #picker_end></mat-datepicker>
+          </mat-form-field>
+      <!-- <mat-form-field color="accent">
+        <input matInput placeholder="End Date" [(ngModel)]="data.end_date" name="end_date" required>
+      </mat-form-field> -->
+    </div>
+
+    <!-- <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Remarks" [(ngModel)]="data.remarks" name="remarks" required>
+      </mat-form-field>
+    </div> -->
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>
+<!-- <div *ngFor="let detail of sowDetails">
+    {{detail.sow_id}}<br>
+    {{detail.sow_name}}<br>
+    {{detail.project_id}}<br>
+    {{detail.project_name}}
+  </div> -->
+  
